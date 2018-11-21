@@ -11,12 +11,15 @@ public class InfoStatic
     // Upgrades Bought & Amounts
     public static bool housebought;
     public static int houses;
+    public static int houseprice;
 
     public static bool marketbought;
     public static int markets;
+    public static int marketprice;
 
     public static bool minebought;
     public static int mines;
+    public static int mineprice;
 
 
     public static int Population
@@ -45,6 +48,18 @@ public class InfoStatic
 
 
     // House
+    public static int HousePrice
+    {
+        get
+        {
+            return houseprice;
+        }
+        set
+        {
+            houseprice = value;
+        }
+    }
+    
     public static bool HousesBought
     {
         get
