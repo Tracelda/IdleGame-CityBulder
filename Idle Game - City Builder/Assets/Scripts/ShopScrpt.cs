@@ -10,28 +10,51 @@ public class ShopScrpt : MonoBehaviour {
     public Text HousePriceValue;
     public GameObject HouseAmountTxt;
     public Text HouseAmountValue;
+    public GameObject PointsTxt;
+    public Text PointstxtVal;
     public string HouseValueString;
     public string HouseAmountString;
+    public string GoldString;
+    public string PopulationString;
 
-	void Start ()
+    void Start ()
     {
         HousePriceTxt = GameObject.Find("HousePriceTxt");
         HousePriceValue = HousePriceTxt.GetComponent<Text>();
         HouseAmountTxt = GameObject.Find("HouseAmountTxt");
         HouseAmountValue = HouseAmountTxt.GetComponent<Text>();
+        PointsTxt = GameObject.Find("PointsTxt");
+        PointstxtVal = PointsTxt.GetComponent<Text>();
+
+        SetPrices();
 
         HouseValueString = HouseValue.ToString(); // Changes Displayed value of House Price
         HousePriceValue.text = "Price: " + HouseValueString;
 
         HouseAmountString = InfoStatic.houses.ToString();
         HouseAmountValue.text = "Built: " + HouseAmountString;
+
 	}
 	
 
 	void Update ()
     {
-		
+        UpdateText();
 	}
+
+    public void SetPrices()
+    {
+        InfoStatic.houseprice = HouseValue;
+    }
+
+    public void UpdateText()
+    {
+        GoldString = InfoStatic.gold.ToString();
+        PopulationString = InfoStatic.population.ToString();
+        PointstxtVal.text = "Gold: " + GoldString + "  Population: " + PopulationString;
+        HouseAmountString = InfoStatic.houses.ToString();
+        HouseAmountValue.text = "Built: " + HouseAmountString;
+    }
 
     public void BuyHouse()
     {
@@ -45,9 +68,10 @@ public class ShopScrpt : MonoBehaviour {
                 InfoStatic.housebought = true;
             }
 
-            InfoStatic.gold -= InfoStatic.houseprice;
+            InfoStatic.gold = InfoStatic.gold - InfoStatic.houseprice;
             InfoStatic.houses++;
-            Debug.Log(InfoStatic.houses);
+            Debug.Log("Houses: " + InfoStatic.houses);
+            Debug.Log("Gold: " + InfoStatic.gold);
             HouseAmountValue.text = "Built: " + HouseAmountString;
         }
         else
