@@ -18,6 +18,8 @@ public class InfoStatic
     public static bool marketbought;
     public static int markets;
     public static int marketprice;
+    public static float marketgoldincome;
+    public static float marketpopincome;
 
     public static bool minebought;
     public static int mines;
@@ -73,6 +75,7 @@ public class InfoStatic
             housebought = value;
         }
     }
+
     public static int Houses
     {
         get
@@ -97,6 +100,7 @@ public class InfoStatic
         }
 
     }
+
     public static float HousePopIncome
     {
         get
@@ -121,6 +125,7 @@ public class InfoStatic
             marketbought = value;
         }
     }
+
     public static int Markets
     {
         get
@@ -130,6 +135,32 @@ public class InfoStatic
         set
         {
             markets = value;
+        }
+
+    }
+
+    public static float MarketGoldIncome
+    {
+        get
+        {
+            return housegoldincome;
+        }
+        set
+        {
+            housegoldincome = value;
+        }
+
+    }
+
+    public static float MarketPopIncome
+    {
+        get
+        {
+            return housepopincome;
+        }
+        set
+        {
+            housepopincome = value;
         }
     }
 
