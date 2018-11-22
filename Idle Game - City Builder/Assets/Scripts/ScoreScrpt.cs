@@ -91,6 +91,7 @@ public class ScoreScrpt : MonoBehaviour {
                 PopulationIncome = Mathf.Floor(PopulationPerSecond);
                 PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
                 Debug.Log("Population Income: " + PopulationIncome);
+                // aaaaa
             }
         }
     }
