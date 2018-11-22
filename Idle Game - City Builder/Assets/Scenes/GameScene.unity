@@ -1039,9 +1039,11 @@ MonoBehaviour:
   GoldPerSecond: 0
   PopulationPerSecond: 0
   Timer: 0
-  TimerTarget: 10
-  HouseGoldIncome: 2
-  HousePopulationIncome: 2
+  TimerTarget: 1
+  HouseGoldIncome: 0.3
+  HousePopulationIncome: 0.3
+  GoldIncome: 0
+  PopulationIncome: 0
 --- !u!114 &1567225033
 MonoBehaviour:
   m_ObjectHideFlags: 0

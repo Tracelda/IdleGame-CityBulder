@@ -17,14 +17,17 @@ public class ScoreScrpt : MonoBehaviour {
     public GameObject PopulationAmount;
     public Text PopulationAmountTxt;
 
-    public int GoldPerSecond;
-    public int PopulationPerSecond;
+    public float GoldPerSecond;
+    public float PopulationPerSecond;
 
     public float Timer;
     public float TimerTarget;
 
-    public int HouseGoldIncome;
-    public int HousePopulationIncome;
+    public float HouseGoldIncome;
+    public float HousePopulationIncome;
+
+    public float GoldIncome;
+    public float PopulationIncome;
 
     void Start ()
     {
@@ -49,12 +52,14 @@ public class ScoreScrpt : MonoBehaviour {
     {
         InfoStatic.gold++;
         GoldString = InfoStatic.gold.ToString();
+        GoldAmountTxt.text = GoldString;
     }
 
     public void UpdatePopulationOnBtn()
     {
         InfoStatic.population++;
         PopulationString = InfoStatic.population.ToString();
+        PopulationAmountTxt.text = PopulationString;
     }
 
     public void AddGold()
@@ -62,6 +67,14 @@ public class ScoreScrpt : MonoBehaviour {
         if (InfoStatic.housebought == true)
         {
             GoldPerSecond += (InfoStatic.housegoldincome * InfoStatic.houses);
+            if(GoldPerSecond >=1)
+            {
+                GoldIncome = 0;
+                Debug.Log("Gold Per Second Higher Than 1");
+                GoldIncome = Mathf.Floor(GoldPerSecond);
+                GoldPerSecond -= Mathf.Floor(GoldPerSecond);
+                Debug.Log("Gold Income: " + GoldIncome);
+            }
         }
     }
 
@@ -70,24 +83,35 @@ public class ScoreScrpt : MonoBehaviour {
         if (InfoStatic.housebought == true)
         {
             PopulationPerSecond += (InfoStatic.housepopincome * InfoStatic.houses);
+            Debug.Log("Pop per second: " + PopulationPerSecond);
+            if (PopulationPerSecond >= 1)
+            {
+                PopulationIncome = 0;
+                Debug.Log("Pop Per Second Higher Than 1");
+                PopulationIncome = Mathf.Floor(PopulationPerSecond);
+                PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
+                Debug.Log("Population Income: " + PopulationIncome);
+            }
         }
     }
 
     public void UpdatePoints()
     {
-        AddGold();
-        AddPopulation();
-
         if (Timer < TimerTarget)
         {
             Timer += Time.deltaTime;
         }
         else if (Timer >= TimerTarget)
         {
-            InfoStatic.gold += GoldPerSecond;
-            InfoStatic.population += PopulationPerSecond;
+            AddGold();
+            AddPopulation();
+            InfoStatic.gold += GoldIncome;
+            InfoStatic.population += PopulationIncome;
             UpdateValues();
+            Debug.Log("Update Values");
             Timer = 0;
+            //PopulationIncome = 0;
+            //GoldIncome = 0;
         }
 
     }
@@ -96,7 +120,9 @@ public class ScoreScrpt : MonoBehaviour {
     {
         Debug.Log("Gold:" + InfoStatic.gold);
         Debug.Log("Population:" + InfoStatic.population);
+        PopulationString = InfoStatic.population.ToString();
         PopulationAmountTxt.text = PopulationString;
+        GoldString = InfoStatic.gold.ToString();
         GoldAmountTxt.text = GoldString;
     }
 

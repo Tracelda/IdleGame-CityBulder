@@ -5,15 +5,15 @@ using UnityEngine;
 public class InfoStatic
 {
     // Score totals
-    public static int population;
-    public static int gold;
+    public static float population;
+    public static float gold;
 
     // Upgrades Bought & Amounts
     public static bool housebought;
     public static int houses;
     public static int houseprice;
-    public static int housegoldincome;
-    public static int housepopincome;
+    public static float housegoldincome;
+    public static float housepopincome;
 
     public static bool marketbought;
     public static int markets;
@@ -24,7 +24,7 @@ public class InfoStatic
     public static int mineprice;
 
 
-    public static int Population
+    public static float Population
     {
         get
         {
@@ -36,7 +36,7 @@ public class InfoStatic
         }
     }
 
-    public static int Gold
+    public static float Gold
     {
         get
         {
@@ -85,7 +85,7 @@ public class InfoStatic
         }
     }
 
-    public static int HouseGoldIncome
+    public static float HouseGoldIncome
     {
         get
         {
@@ -97,7 +97,7 @@ public class InfoStatic
         }
 
     }
-    public static int HousePopIncome
+    public static float HousePopIncome
     {
         get
         {
