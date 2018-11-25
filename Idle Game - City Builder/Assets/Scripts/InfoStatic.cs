@@ -6,6 +6,7 @@ public class InfoStatic
 {
     // Score totals
     public static float population;
+    public static float populationlimit;
     public static float gold;
 
     // Upgrades Bought & Amounts
@@ -35,6 +36,18 @@ public class InfoStatic
         set
         {
             population = value;
+        }
+    }
+
+    public static float PopulationLimit
+    {
+        get
+        {
+            return populationlimit;
+        }
+        set
+        {
+            populationlimit = value;
         }
     }
 

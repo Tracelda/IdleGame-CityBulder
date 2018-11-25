@@ -7,20 +7,17 @@ public class ScoreScrpt : MonoBehaviour {
 
     public InfoStatic InfoStatic;
     public BuildingScrpt BuildingScrpt;
-    public string GoldString;
-    public string PopulationString;
 
+    // Text
     public GameObject GoldAmount;
     public Text GoldAmountTxt;
     public GameObject PopulationAmount;
     public Text PopulationAmountTxt;
 
-    public float GoldPerSecond;
-    public float PopulationPerSecond;
-
     public float Timer;
     public float TimerTarget;
 
+    // Points stuff
     public float HouseGoldIncome;
     public float HousePopulationIncome;
 
@@ -29,6 +26,15 @@ public class ScoreScrpt : MonoBehaviour {
 
     public float GoldIncome;
     public float PopulationIncome;
+
+    public float GoldPerSecond;
+    public float PopulationPerSecond;
+
+    public string GoldString;
+    public string PopulationString;
+
+    public float BasePopulationLimit;
+    public float HousePopulationModifier;
 
     void Start ()
     {
@@ -39,7 +45,6 @@ public class ScoreScrpt : MonoBehaviour {
         PopulationAmountTxt = PopulationAmount.GetComponent<Text>();
 
         BuildingScrpt.ShowBuildings(); // Check which building have been bought 
-
         SetIncomes();
         
     }
@@ -49,21 +54,26 @@ public class ScoreScrpt : MonoBehaviour {
         UpdatePoints();
     }
 
-    public void UpdateGoldOnBtn()
+    public void UpdateGoldOnBtn() // Adds one to gold score when button is pressed
     {
-        InfoStatic.gold++;
-        GoldString = InfoStatic.gold.ToString();
-        GoldAmountTxt.text = GoldString;
+            InfoStatic.gold++;
+            GoldString = InfoStatic.gold.ToString();
+            GoldAmountTxt.text = GoldString;
     }
 
-    public void UpdatePopulationOnBtn()
+    public void UpdatePopulationOnBtn() // Adds one to population score when button is pressed
     {
-        InfoStatic.population++;
-        PopulationString = InfoStatic.population.ToString();
-        PopulationAmountTxt.text = PopulationString;
+
+        if (InfoStatic.population < InfoStatic.populationlimit)
+        {
+            InfoStatic.population++;
+            PopulationString = InfoStatic.population.ToString();
+            PopulationAmountTxt.text = PopulationString;
+        }
+        else { Debug.Log("Max population reached"); }
     }
 
-    public void AddGold()
+    public void AddGold() // adds gold incomes together and adds total to gold score
     {
         if (InfoStatic.housebought == true)
         {
@@ -93,34 +103,38 @@ public class ScoreScrpt : MonoBehaviour {
         }
     }
 
-    public void AddPopulation()
+    public void AddPopulation() // adds population incomes together and adds total to population score
     {
-        if (InfoStatic.housebought == true)
+        if  (InfoStatic.population < InfoStatic.populationlimit)
         {
-            PopulationPerSecond += (InfoStatic.housepopincome * InfoStatic.houses);
-            Debug.Log("Pop per second: " + PopulationPerSecond);
-            if (PopulationPerSecond >= 1)
+            if (InfoStatic.housebought == true)
             {
-                // PopulationIncome = 0;
-                Debug.Log("Pop Per Second Higher Than 1");
-                PopulationIncome = Mathf.Floor(PopulationPerSecond);
-                PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
-                Debug.Log("Population Income: " + PopulationIncome);
+                PopulationPerSecond += (InfoStatic.housepopincome * InfoStatic.houses);
+                Debug.Log("Pop per second: " + PopulationPerSecond);
+                if (PopulationPerSecond >= 1)
+                {
+                    // PopulationIncome = 0;
+                    Debug.Log("Pop Per Second Higher Than 1");
+                    PopulationIncome = Mathf.Floor(PopulationPerSecond);
+                    PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
+                    Debug.Log("Population Income: " + PopulationIncome);
+                }
             }
-        }
-        if (InfoStatic.marketbought == true)
-        {
-            PopulationPerSecond += (InfoStatic.marketpopincome * InfoStatic.markets);
-            Debug.Log("Pop per second: " + PopulationPerSecond);
-            if (PopulationPerSecond >= 1)
+            if (InfoStatic.marketbought == true)
             {
-                // PopulationIncome = 0;
-                Debug.Log("Pop Per Second Higher Than 1");
-                PopulationIncome = Mathf.Floor(PopulationPerSecond);
-                PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
-                Debug.Log("Population Income: " + PopulationIncome);
+                PopulationPerSecond += (InfoStatic.marketpopincome * InfoStatic.markets);
+                Debug.Log("Pop per second: " + PopulationPerSecond);
+                if (PopulationPerSecond >= 1)
+                {
+                    // PopulationIncome = 0;
+                    Debug.Log("Pop Per Second Higher Than 1");
+                    PopulationIncome = Mathf.Floor(PopulationPerSecond);
+                    PopulationPerSecond -= Mathf.Floor(PopulationPerSecond);
+                    Debug.Log("Population Income: " + PopulationIncome);
+                }
             }
-        }
+        } 
+        else { Debug.Log("Max population reached"); }
     }
 
     public void UpdatePoints()
@@ -144,7 +158,7 @@ public class ScoreScrpt : MonoBehaviour {
 
     }
 
-    public void UpdateValues()
+    public void UpdateValues() // updates the values of text boxes
     {
         Debug.Log("Gold:" + InfoStatic.gold);
         Debug.Log("Population:" + InfoStatic.population);
@@ -160,5 +174,10 @@ public class ScoreScrpt : MonoBehaviour {
         InfoStatic.housepopincome = HousePopulationIncome;
         InfoStatic.marketgoldincome = MarketGoldIncome;
         InfoStatic.marketpopincome = MarketPopulationIncome;
+    }
+
+    public void ChangePopulationLimit()
+    {
+        InfoStatic.populationlimit = BasePopulationLimit + (InfoStatic.houses * HousePopulationModifier);
     }
 }
