@@ -13,6 +13,8 @@ public class ScoreScrpt : MonoBehaviour {
     public Text GoldAmountTxt;
     public GameObject PopulationAmount;
     public Text PopulationAmountTxt;
+    public GameObject PopulationLimAmount;
+    public Text PopulationLimAmountTxt;
 
     public float Timer;
     public float TimerTarget;
@@ -32,6 +34,7 @@ public class ScoreScrpt : MonoBehaviour {
 
     public string GoldString;
     public string PopulationString;
+    public string PopulationLimString;
 
     public float BasePopulationLimit;
     public float HousePopulationModifier;
@@ -43,6 +46,9 @@ public class ScoreScrpt : MonoBehaviour {
 
         PopulationAmount = GameObject.Find("PopulationAmount");
         PopulationAmountTxt = PopulationAmount.GetComponent<Text>();
+
+        PopulationLimAmount = GameObject.Find("PopulationLimAmount");
+        PopulationLimAmountTxt = PopulationLimAmount.GetComponent<Text>();
 
         BuildingScrpt.ShowBuildings(); // Check which building have been bought 
         SetIncomes();
@@ -134,7 +140,15 @@ public class ScoreScrpt : MonoBehaviour {
                 }
             }
         } 
-        else { Debug.Log("Max population reached"); }
+        else if (InfoStatic.population > InfoStatic.populationlimit)
+        {
+            InfoStatic.population = InfoStatic.populationlimit;
+            Debug.Log("Max population exceeded");
+        }
+        else if (InfoStatic.population == InfoStatic.populationlimit)
+        {
+            Debug.Log("Max population reached");
+        }
     }
 
     public void UpdatePoints()
@@ -152,10 +166,10 @@ public class ScoreScrpt : MonoBehaviour {
             UpdateValues();
             Debug.Log("Update Values");
             Timer = 0;
+            ChangePopulationLimit();
             //PopulationIncome = 0;
             //GoldIncome = 0;
         }
-
     }
 
     public void UpdateValues() // updates the values of text boxes
@@ -166,9 +180,11 @@ public class ScoreScrpt : MonoBehaviour {
         PopulationAmountTxt.text = PopulationString;
         GoldString = InfoStatic.gold.ToString();
         GoldAmountTxt.text = GoldString;
+        PopulationLimString = InfoStatic.populationlimit.ToString();
+        PopulationLimAmountTxt.text = PopulationLimString;
     }
 
-    public void SetIncomes()
+    public void SetIncomes() // Sets up the income valuses of upgrades
     {
         InfoStatic.housegoldincome = HouseGoldIncome;
         InfoStatic.housepopincome = HousePopulationIncome;
