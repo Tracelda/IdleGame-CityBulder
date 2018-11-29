@@ -145,4 +145,6 @@ public class ShopScrpt : MonoBehaviour {
             Debug.Log("Not Enough Gold");
         }
     }
+
+    
 }
