@@ -1331,7 +1331,7 @@ MonoBehaviour:
   PopulationLimAmountTxt: {fileID: 0}
   Timer: 0
   TimerTarget: 1
-  HouseGoldIncome: 0.3
+  HouseGoldIncome: 0.1
   HousePopulationIncome: 0.3
   MarketGoldIncome: 1
   MarketPopulationIncome: 0.5

@@ -9,8 +9,10 @@ public class ShopScrpt : MonoBehaviour {
     public InfoStatic InfoStatic;
     
     // Points
-    public GameObject PointsTxt;
-    public Text PointstxtVal;
+    public GameObject GoldTxt;
+    public Text GoldtxtVal;
+    public GameObject PopulationTxt;
+    public Text PopulationtxtVal;
     public string GoldString;
     public string PopulationString;
 
@@ -62,8 +64,10 @@ public class ShopScrpt : MonoBehaviour {
         MarketAmountValue.text = "Built: " + MarketAmountString;
 
         // Points
-        PointsTxt = GameObject.Find("PointsTxt");
-        PointstxtVal = PointsTxt.GetComponent<Text>();
+        GoldTxt = GameObject.Find("GoldTxt");
+        GoldtxtVal = GoldTxt.GetComponent<Text>();
+        PopulationTxt = GameObject.Find("PopulationTxt");
+        PopulationtxtVal = PopulationTxt.GetComponent<Text>();
     }
 	
 
@@ -83,7 +87,8 @@ public class ShopScrpt : MonoBehaviour {
         // Points Text
         GoldString = InfoStatic.gold.ToString();
         PopulationString = InfoStatic.population.ToString();
-        PointstxtVal.text = "Gold: " + GoldString + "  Population: " + PopulationString;
+        GoldtxtVal.text = GoldString;
+        PopulationtxtVal.text = PopulationString;
         // House Text
         HouseAmountString = InfoStatic.houses.ToString();
         HouseAmountValue.text = "Built: " + HouseAmountString;
