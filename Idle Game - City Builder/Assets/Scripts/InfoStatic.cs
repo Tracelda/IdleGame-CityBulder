@@ -26,6 +26,9 @@ public class InfoStatic
     public static int mines;
     public static int mineprice;
 
+    // Theme
+    public static bool themebought;
+
 
     public static float Population
     {
@@ -174,6 +177,18 @@ public class InfoStatic
         set
         {
             housepopincome = value;
+        }
+    }
+
+    public static bool ThemeBought
+    {
+        get
+        {
+            return themebought;
+        }
+        set
+        {
+            themebought = value;
         }
     }
 

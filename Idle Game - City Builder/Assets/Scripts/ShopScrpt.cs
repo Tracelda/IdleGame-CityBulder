@@ -34,6 +34,12 @@ public class ShopScrpt : MonoBehaviour {
     public GameObject MarketAmountTxt;
     public Text MarketAmountValue;
 
+    // Themes
+    public float ThemePrice;
+
+    //Boosters
+    public float SmallIncome;
+    public float BigIncome;
 
     void Start ()
     {
@@ -68,6 +74,13 @@ public class ShopScrpt : MonoBehaviour {
         GoldtxtVal = GoldTxt.GetComponent<Text>();
         PopulationTxt = GameObject.Find("PopulationTxt");
         PopulationtxtVal = PopulationTxt.GetComponent<Text>();
+
+        // Themes
+        ThemePrice = 100;
+
+        // Boosters
+        SmallIncome = 100;
+        BigIncome = 1000;
     }
 	
 
@@ -146,5 +159,23 @@ public class ShopScrpt : MonoBehaviour {
         }
     }
 
-    
+    public void BuyThemeOnBtnPress()
+    {
+        if (InfoStatic.themebought == false)
+        {
+            InfoStatic.themebought = true;
+            InfoStatic.gold -= ThemePrice;
+        }
+    }
+
+    public void BuySmallBoosterOnBtnPress()
+    {
+        InfoStatic.gold += SmallIncome;
+    }
+
+    public void BuyLargeBoosterOnBtnPress()
+    {
+        InfoStatic.gold += BigIncome;
+    }
+
 }
