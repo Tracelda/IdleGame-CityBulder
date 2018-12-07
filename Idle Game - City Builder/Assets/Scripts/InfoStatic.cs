@@ -29,8 +29,6 @@ public class InfoStatic
     // Theme
     public static bool themebought;
 
-    // Date
-    
 
     public static float Population
     {
